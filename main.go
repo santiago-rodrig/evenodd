@@ -24,17 +24,8 @@ func main() {
 	}
 
 	start, end, _ := parseArgs()
-	evens, odds := 0, 0
-
-	for i := start; i <= end; i++ {
-		if i % 2 == 0 {
-			evens++
-		} else {
-			odds++
-		}
-	}
-
-	fmt.Printf(responseTemplate, start, end, start, end, evens, odds, evens+odds)
+	evens, odds, total := analyzeRange(start, end)
+	fmt.Printf(responseTemplate, start, end, start, end, evens, odds, total)
 }
 
 const responseTemplate = `for all the integers between %d and %d ([%d, %d])...
@@ -90,4 +81,18 @@ func argsAreInvalid() bool {
 	}
 
 	return false
+}
+
+func analyzeRange(start, end int) (evens, odds, total int) {
+	for i := start; i <= end; i++ {
+		if i % 2 == 0 {
+			evens++
+		} else {
+			odds++
+		}
+	}
+
+	total = evens+odds
+
+	return
 }
